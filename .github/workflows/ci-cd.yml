@@ -40,10 +40,30 @@ jobs:
         run: npm run build
 
       - name: Run unit tests
-        run: npm test
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p artifacts/logs
+          npm test 2>&1 | tee artifacts/logs/unit-tests.log
 
       - name: Run e2e tests
-        run: npm run test:e2e
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p artifacts/logs
+          npm run test:e2e 2>&1 | tee artifacts/logs/e2e-tests.log
+
+      - name: Upload test artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-artifacts
+          path: |
+            artifacts
+            playwright-report
+            test-results
+          if-no-files-found: warn
+          overwrite: true
 
       - name: Upload build artifact
         if: success()

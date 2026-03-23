@@ -63,6 +63,12 @@ GitHub Actions workflow:
 - Runs all unit tests
 - Runs all BDD E2E tests
 - Uploads the build artifact (`dist`)
+- Uploads test artifacts for each run (`test-artifacts`), including:
+	- unit test log: `artifacts/logs/unit-tests.log`
+	- e2e test log: `artifacts/logs/e2e-tests.log`
+	- Playwright JSON + JUnit reports: `artifacts/e2e/`
+	- Playwright HTML report: `playwright-report/`
+	- Playwright runtime output: `test-results/`
 
 Workflow file: `.github/workflows/ci-cd.yml`
 
