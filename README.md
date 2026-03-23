@@ -69,7 +69,7 @@ Workflow file: `.github/workflows/ci-cd.yml`
 ## Project Structure
 
 ```text
-my-first-project/
+calculator/
 	.github/
 		workflows/
 			ci-cd.yml
